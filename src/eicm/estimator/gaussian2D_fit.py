@@ -50,8 +50,8 @@ def get_cov_matrix(img):
         indexing="ij",
     )
     cen = centroid(img)
-    y = y.ravel() - cen[1]
-    x = x.ravel() - cen[2]
+    y = y.ravel() - cen[0]
+    x = x.ravel() - cen[1]
 
     cxx = cov(x, x, img.ravel())
     cyy = cov(y, y, img.ravel())
@@ -68,7 +68,7 @@ def get_estimates(data):
     """
     max_ = data.max()
     mean_ = data.mean()
-    cz, cy, cx = centroid(data)
+    cy, cx = centroid(data)
     cov = get_cov_matrix(data)
     return [
         max_ - mean_,
