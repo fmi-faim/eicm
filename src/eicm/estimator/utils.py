@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def normalize_matrix(matrix):
     """
     Normalize matrix to [0, 1] by dividing it by its maximum value.
@@ -5,4 +8,4 @@ def normalize_matrix(matrix):
     :param matrix:
     :return: normalized matrix
     """
-    return matrix / matrix.max()
+    return np.clip(matrix / matrix.max(), 0.0, 1.0)
