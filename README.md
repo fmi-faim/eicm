@@ -4,7 +4,7 @@
 [![tests](https://github.com/fmi-faim/eicm/workflows/tests/badge.svg)](https://github.com/fmi-faim/eicm/actions)
 [![codecov](https://codecov.io/gh/fmi-faim/eicm/branch/main/graph/badge.svg)](https://codecov.io/gh/fmi-faim/eicm)
 
-Two functions to estimate illumination correction matrices from reference
+Functions to estimate illumination correction matrices from reference
 illumination samples.
 
 * [`gaussian_blur.py`](./src/eicm/estimator/gaussian_blur.py): simply
