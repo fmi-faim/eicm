@@ -11,10 +11,12 @@ illumination samples.
   applies a Gaussian blur
 * [`gaussian2D_fit.py`](./src/eicm/estimator/gaussian2D_fit.py): fits a 2D
   Gaussian
+* [`polynomial_fit.py`](./src/eicm/estimator/polynomial_fit.py): fits a
+  polynomial
 
 ## Installation
 
 ```shell
-pip install git+https://github.com/fmi-faim/eicm@v0.1.0
+pip install git+https://github.com/fmi-faim/eicm@v0.1.1
 ```
-This installs tag [v0.1.0](https://github.com/fmi-faim/eicm/tree/v0.1.0).
+This installs tag [v0.1.1](https://github.com/fmi-faim/eicm/tree/v0.1.1).
