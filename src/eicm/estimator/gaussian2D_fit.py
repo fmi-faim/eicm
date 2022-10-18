@@ -9,7 +9,7 @@ def ellipsoid_2D(coords, A, B, mu_x, mu_y, cxx, cxy, cyy):
 
     :param coords: at which the evaluation takes place
     :param A: amplitude
-    :param B: offset (also referred to as background)
+    :param B: offset
     :param mu_x: x location of the centroid
     :param mu_y: y location of the centroid
     :param cxx: covariance matrix term at 00
