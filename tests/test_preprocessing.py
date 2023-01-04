@@ -1,11 +1,17 @@
+from os.path import join
+from pathlib import Path
 from unittest import TestCase
 
 from src.eicm.preprocessing.yokogawa import get_metadata, parse_filename
 
+THIS_DIR = Path(__file__).parent
+
 
 class Yokogawa(TestCase):
     def test_get_metadata(self):
-        acq_date, px_size, px_size_unit, channels = get_metadata("../resources/")
+        acq_date, px_size, px_size_unit, channels = get_metadata(
+            join(THIS_DIR.parent, "resources")
+        )
 
         assert acq_date == "2022-12-21"
         assert px_size == 0.10833333333333334
