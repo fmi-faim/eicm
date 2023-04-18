@@ -4,6 +4,7 @@ from typing import List
 
 import numpy as np
 from tifffile import imread
+from tqdm import tqdm
 
 
 def average_of_mips(
@@ -48,7 +49,7 @@ def average_of_thresholded_mips(
     """
 
     def image_generator():
-        for path in image_files:
+        for path in tqdm(sorted(image_files)):
             logger.info(f"Processing {path}.")
             yield imread(path)
 
