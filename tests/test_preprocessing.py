@@ -2,6 +2,12 @@ from os.path import join
 from pathlib import Path
 from unittest import TestCase
 
+import numpy as np
+
+from eicm.preprocessing.multiple_tiles import (
+    average_of_mips,
+    average_of_thresholded_mips,
+)
 from src.eicm.preprocessing.yokogawa import get_metadata, parse_filename
 
 THIS_DIR = Path(__file__).parent
@@ -84,3 +90,59 @@ class Yokogawa(TestCase):
         assert a == action
         assert z_ == 32
         assert ch == channel
+
+
+class MultipleTiles(TestCase):
+    def test_average_of_thresholded_mips_lower(self):
+        images = [
+            "gradient-left-right.tif",
+            "gradient-top-bottom.tif",
+        ]
+        reference = average_of_thresholded_mips(
+            [join(THIS_DIR.parent, "resources", file) for file in images],
+            lower_threshold=128,
+        )
+        assert reference.shape == (256, 256)
+        assert np.isnan(reference[0, 0])
+        assert np.isnan(reference[127, 127])
+        assert reference[128, 128] == 128
+        assert reference[255, 255] == 255
+
+        assert reference[0, 255] == 255
+        assert reference[255, 0] == 255
+
+    def test_average_of_thresholded_mips(self):
+        images = [
+            "gradient-left-right.tif",
+            "gradient-top-bottom.tif",
+        ]
+        reference = average_of_thresholded_mips(
+            [join(THIS_DIR.parent, "resources", file) for file in images],
+            lower_threshold=0,
+            upper_threshold=127,
+        )
+        assert reference.shape == (256, 256)
+        assert reference[0, 0] == 0
+        assert reference[127, 127] == 127
+        assert np.isnan(reference[128, 128])
+        assert np.isnan(reference[255, 255])
+
+        assert reference[0, 255] == 0
+        assert reference[255, 0] == 0
+
+    def test_average_of_mips(self):
+        images = [
+            "gradient-left-right.tif",
+            "gradient-top-bottom.tif",
+        ]
+        reference = average_of_mips(
+            [join(THIS_DIR.parent, "resources", file) for file in images],
+        )
+        assert reference.shape == (256, 256)
+        assert reference[0, 0] == 0
+        assert reference[127, 127] == 127
+        assert reference[128, 128] == 128
+        assert reference[255, 255] == 255
+
+        assert reference[0, 255] == 127.5
+        assert reference[255, 0] == 127.5
