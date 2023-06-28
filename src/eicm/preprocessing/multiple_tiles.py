@@ -7,6 +7,28 @@ from tifffile import imread
 from tqdm import tqdm
 
 
+def minimum_of_minimum_projections(
+    image_files: List[Path],
+    logger=logging,
+):
+    """
+    Computes a minimum projection of all input stacks.
+    """
+
+    def image_generator():
+        for path in tqdm(sorted(image_files)):
+            logger.info(f"Processing {path}.")
+            yield imread(path)
+
+    images = image_generator()
+
+    min_images = []
+    for image in images:
+        min_images.append(np.min(image, axis=0))
+
+    return np.min(min_images, axis=0)
+
+
 def average_of_mips(
     image_files: List[Path],
     logger=logging,
