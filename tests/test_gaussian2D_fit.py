@@ -36,10 +36,7 @@ def gaussian_2d(
             Shifts the Gaussian `up` or `down` i.e. the background signal.
     """
     return lambda y, x: offset + height * np.exp(
-        -(
-            ((y - mu_y) ** 2 / (2 * sigma_y**2))
-            + ((x - mu_x) ** 2 / (2 * sigma_x**2))
-        )
+        -(((y - mu_y) ** 2 / (2 * sigma_y**2)) + ((x - mu_x) ** 2 / (2 * sigma_x**2)))
     )
 
 
