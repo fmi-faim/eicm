@@ -1,3 +1,5 @@
+__Moved functionality to [faim-ipa](https://github.com/fmi-faim/faim-ipa).__
+
 # Estimate Illumination Correction Matrix
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
